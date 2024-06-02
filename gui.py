@@ -1,9 +1,7 @@
 import tkinter as tk
 import tkinter.font as font
 from tkinter import *
-import time
 import requests
-import sys
 from datetime import datetime
 import yttmp3
 
@@ -48,7 +46,7 @@ def main_gui():
 
     label = tk.Label(root, text = "Input URL to a YouTube Video", font=body)
     label.place(relx=0.5, rely=0.18, anchor=CENTER)
-    
+
 
     error = tk.Label(root, font=errorFont, fg="red")
     error.place(relx=0.5, rely=0.125, anchor=CENTER)
