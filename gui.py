@@ -59,6 +59,42 @@ def main_gui():
     timeLabel = Label(root)
     timeLabel.place(relx=0.5, rely = 0.975, anchor=CENTER)
 
+    # Keep track of the button state on/off
+    global is_on
+    global audio_only
+    is_on = True
+    audio_only = True
+    
+    # Define our switch function
+    def switch():
+        global is_on
+        global audio_only
+        
+        # Determine is on or off
+        if is_on:
+            on_button.config(image = off)
+            is_on = False
+            audio_only = False
+            print("Switch is now off")
+        else:
+        
+            on_button.config(image = on)
+            is_on = True
+            audio_only = True
+            print("Switch is now on")
+    
+    # Define Our Images
+    on = PhotoImage(file = "on.png")
+    off = PhotoImage(file = "off.png")
+    
+    # Create A Button
+    on_button = Button(root, image = on, bd = 0,
+                    command = switch)
+    on_button.pack(pady = 150)
+
+    audioOnlyLabel = Label(root, text="Audio Only")
+    audioOnlyLabel.place(relx = 0.44, rely=0.445)
+
     def clock():
         t = datetime.now().strftime("Current Time: %H:%M:%S")
         timeLabel['text'] = t
@@ -67,12 +103,12 @@ def main_gui():
 
     # Create a function to handle button click event
     def button_click():
-        yttmp3.yttmp3(url.get())
-        completed.place(relx = 0.5, rely = 0.5, anchor=CENTER)  # Add the button to the window
+        yttmp3.yttmp3(url.get(), audio_only)
+        completed.place(relx = 0.5, rely = 0.8, anchor=CENTER)  # Add the button to the window
 
 
     # Create a button widget
-    button = tk.Button(root, text="Begin Tracking", command=button_click)
+    button = tk.Button(root, text="Convert File", command=button_click)
     button.place(relx = 0.5, rely = 0.35, anchor=CENTER)  # Add the button to the window
 
     completed = tk.Label(root, text="Download Completed")
